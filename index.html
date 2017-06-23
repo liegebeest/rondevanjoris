@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="img/bike.ico" type="image/x-icon" />
 
     <title>Ronde van Joris</title>
-   <!-- Bootstrap Core CSS -->
+    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -255,83 +255,28 @@ Ideaal voor renners die liever inidividueel de Vlaamse Ardennen verkennen.<br><b
 <br><br>
 <!-- End test with routes tables -->	
 
-<!-- start upcoming routes table -->
-<div class="container">
-<div class="row">
-			<div class="col-md-12">
-			
-		
-  <div class="box">
-            <div class="box-header">
-              <h6 class="box-title text-left">Routes volgende maand</h6>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body text-left">
-              <table class="table table-striped">
-                <tr>
-                  <th>Datum</th>
-                  <th>Route</th>
-                  <th>Vrije plaatsen</th>
-				  <th>Prijs / Persoon</th>
-				  <th>Inschrijven</th>
-                </tr>
-                <tr>
-                  <td>02/07/2017</td>
-                  <td>Parelroute</td>
-                  <td><span class="badge bg-primary">6</span></td>
-				  <td>28 Euro incl BTW</td>
-				  <td><a href="#contact" class="btn btn-success btn-xs" role="button" aria-disabled="true">Inschrijven</a></td>
-                </tr>
-				  <tr>
-                  <td>09/07/2017</td>
-                  <td>Klassieke Route</td>
-                  <td><span class="badge bg-red">4</span></td>
-				   <td>72 Euro incl BTW</td>
-				   <td><a href="#contact" class="btn btn-success btn-xs" role="button" aria-disabled="true">Inschrijven</a></td>
-                </tr>
-				  <tr>
-                  <td>16/07/2017</td>
-                  <td>Parelroute</td>
-                  <td><span class="badge bg-red">6</span></td>
-				   <td>28 Euro incl BTW</td>
-				   <td><a href="#contact" class="btn btn-success btn-xs" role="button" aria-disabled="true">Inschrijven</a></td>
-                </tr>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-		  </div>
-		  </div>
-</div>
-<!-- end upcoming routes table -->
+
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">		
-			<table 	id="routes"
-			data-height="300">
-			</table>
+			<table class="table" id="routes"></table>
 		</div>
 	</div>
 </div>	
 
 
-		<div class="container">
-<!--		<div class="row">
-			<div class="col-lg-2 col-lg-offset-5">
-				<hr class="marginbot-50">
+<div class="container">
+<div class="row">
+    <div class="col-md-10 text-left">
+		<div class="wow fadeInLeft" data-wow-delay="0.2s">
+        <div class="service-box">
+			<div class="service-icon">
+
 			</div>
-		</div> -->
-        <div class="row">
-            <div class="col-md-10 text-left">
-				<div class="wow fadeInLeft" data-wow-delay="0.2s">
-                <div class="service-box">
-					<div class="service-icon">
 
-					</div>
-
-                </div>
-				</div>
-            </div>
+        </div>
+		</div>
+    </div>
 </div>	
 <br>
  <div class="row">
@@ -623,16 +568,29 @@ Prijs: <b>85 Eur</b> per halve dag  (zorgvuldige uitgekiende route op maat, coac
 	 var $table = $('#routes');
 		     $table.bootstrapTable({
 			      url: 'http://rondevanjoris.be/routes.php',
+			      striped: true,
 			      columns: [{
 			          field: 'date',
+			          title: 'Datum',
+			          align: 'left'
 			      },{
 			          field: 'route',
+			          title: 'Route',
+			          align: 'left'
 			      },{
 			          field: 'price',
+			          title: 'Prijs/Persoon',
+			          align: 'left'
 			      },{
 			          field: 'places',
+			          title: 'Vrije plaatsen',
+			          align: 'left'
 			      } ],
   			 });
+  			 
+		 
+
+
 
 </script>
 </body>
