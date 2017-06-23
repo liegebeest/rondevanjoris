@@ -21,9 +21,6 @@
     <!-- Squad theme CSS -->
     <link href="css/style.css" rel="stylesheet">
 	<link href="color/default.css" rel="stylesheet">
-
-
-    
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -50,14 +47,6 @@
         <li><a href="#service">Routes</a></li>
 		<li><a href="#about">Joris</a></li>
 		<li><a href="#contact">Contact</a></li>
-<!--        <li class="dropdown"> if extra menu item is needed - put it here
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Example menu</a></li>
-            <li><a href="#">Example menu</a></li>
-            <li><a href="#">Example menu</a></li>
-          </ul>
-        </li> -->
       </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -258,7 +247,11 @@ Ideaal voor renners die liever inidividueel de Vlaamse Ardennen verkennen.<br><b
 
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">		
+		<div class="col-xs-12">	
+		 <div class="box">
+            <div class="box-header">
+              <h6 class="box-title text-left">Geplande Routes</h6>
+            </div>
 			<table class="table" id="routes"></table>
 		</div>
 	</div>
@@ -565,10 +558,16 @@ Prijs: <b>85 Eur</b> per halve dag  (zorgvuldige uitgekiende route op maat, coac
   </div>
   <!-- script for dynamic table --> 
   <script type="text/javascript">
+     var $x = 'test'
 	 var $table = $('#routes');
 		     $table.bootstrapTable({
 			      url: 'http://rondevanjoris.be/routes.php',
 			      striped: true,
+			      pagination: true,
+			      pageSize: 20,
+			      pageList: [20, 40, 60, 100, 200],
+                  minimumCountColumns: 2,
+                  clickToSelect: true,
 			      columns: [{
 			          field: 'date',
 			          title: 'Datum',
@@ -584,6 +583,10 @@ Prijs: <b>85 Eur</b> per halve dag  (zorgvuldige uitgekiende route op maat, coac
 			      },{
 			          field: 'places',
 			          title: 'Vrije plaatsen',
+			          align: 'left'
+			      },{
+			          field: 'subscribe',
+			          title: 'Inschrijven',
 			          align: 'left'
 			      } ],
   			 });
