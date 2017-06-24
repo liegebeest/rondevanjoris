@@ -395,13 +395,13 @@
 <script src="js/wow.min.js"></script>
 <script src="js/bootstrap-table.js"></script>
 <script src="js/custom.js"></script>
-
 <script>
 // Code to auto collapse navigation menu on mobile view //
 $('.navbar-collapse a').click(function(){
     $(".navbar-collapse").collapse('hide');
 });
 </script>  
+
 
 <!-- modal details window parel -->
 <div class="modal fade" id="parel" role="dialog">
@@ -489,67 +489,12 @@ Prijs: <b>85 Eur</b> per halve dag  (zorgvuldige uitgekiende route op maat, coac
       
     </div>
 </div>
-  
-  
-<!-- script for dynamic table routes --> 
-<script type="text/javascript">
- var $table = $('#routes');
-	     $table.bootstrapTable({
-		      url: 'http://rondevanjoris.be/routes.php',
-		      striped: true,
-		      pagination: true,
-		      pageSize: 20,
-		      pageList: [20, 40, 60, 100, 200],
-              minimumCountColumns: 2,
-              clickToSelect: true,
-		      columns: [{
-		          field: 'date',
-		          title: 'Datum',
-		          align: 'left'
-		      },{
-		          field: 'route',
-		          title: 'Route',
-		          align: 'left'
-		      },{
-		          field: 'price',
-		          title: 'Prijs/Persoon',
-		          align: 'left'
-		      },{
-		          field: 'places',
-		          title: 'Vrije plaatsen',
-		          align: 'left'
-		      },{
-		          field: 'subscribe',
-		          title: 'Inschrijven',
-		          align: 'left'
-		      } ],
-  		 });
-</script>
-    
-<!-- script for dynamic table columns --> 
-<script type="text/javascript">
- var $table = $('#stukjes');
-	     $table.bootstrapTable({
-		      url: 'http://rondevanjoris.be/columns.php',
-		      striped: true,
-		      pagination: true,
-		      pageSize: 20,
-		      pageList: [20, 40, 60, 100, 200],
-              minimumCountColumns: 2,
-              clickToSelect: true,
-		      columns: [{
-		          field: 'link',
-		          title: 'Column',
-		          align: 'left',
-		          width: "500"
-		      },{
-		          field: 'source',
-		          title: 'Bron',
-		          align: 'left',
-		          width: "500"
-		      } ],
-  		 });
-</script>
+
+<!-- Custom JavaScript Files -->
+<!-- script for dynamic routes --> 
+<script type="text/javascript" src="js/routes.js"></script>
+<!-- script for dynamic columns --> 
+<script type="text/javascript" src="js/columns.js"></script>
 
 </body>
 </html>
