@@ -11,6 +11,25 @@
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    
+    <!-- Include Bootstrap Datepicker -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+
+<style type="text/css">
+/**
+ * Override feedback icon position
+ * See http://formvalidation.io/examples/adjusting-feedback-icon-position/
+ */
+#eventForm .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+</style>
+
+
     <!-- Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="css/animate.css" rel="stylesheet" />
@@ -157,21 +176,12 @@
                         <h6 class="box-title text-left">Geplande Routes</h6>
                     </div>
     			<table class="table" id="routes"></table>
+    			<a href="#contact" class="btn btn-success" role="button" aria-disabled="true">Inschrijven</a>
     		    </div>
     	    </div>
         </div>	
         <br/>
         <br/>
-    	<div class="row">
-    		<div class="col-xs-12">	
-    		    <div class="box">
-                    <div class="box-header">
-                        <h6 class="box-title text-left">Zelf een datum kiezen?</h6>
-                    </div>
-    		    <a href="#contact" class="btn btn-success" role="button" aria-disabled="true">Eigen datum</a>
-    		    </div>
-    	    </div>
-        </div>	
         <div class="container">
             <div class="row">
                 <div class="col-md-10 text-left">
@@ -270,6 +280,10 @@
 </div>
 </section>
 
+
+
+
+
 <!-- Section: contact -->
 <section id="contact" class="home-section text-center">
 	<div class="heading-contact">
@@ -294,7 +308,7 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="boxed-grey">
-                <form name="contact" id="contact" action="http://rondevanjoris.be/mail.php" method="post">
+                <form name="contact" id="contactform" action="http://rondevanjoris.be/mail.php" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -310,28 +324,43 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email">GSM</label> 
+                                <label for="email">Gsm</label> 
                                 <div class="form-group">
                                     <input type="tel" class="form-control" name="gsm" id="gsm" placeholder="Vul je Gsm nummer in" minlength="10" maxlength="100" data-msg="Vul je GSM nummer in"/>
                                     <div class="validation"></div>
                                 </div>
                             </div>
+                            <label for="datePikcer">Datum(*)</label>
+                            <div class="form-group">
+                                <div class="input-group input-append date" id="datePicker">
+                                    <input type="text" class="form-control" name="date" placeholder="Vul een datum in" />
+                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="message">Bericht(*)</label> 
-                                <textarea class="form-control" name="content" rows="9" data-rule="required" data-msg="" maxlength="1000" placeholder="Vermeld: jouw route keuze, datum (gepland of eigen datum) en het aantal personen" required></textarea>
-                                <div class="validation"></div>
-                            </div>
+                                <label for="routes">Route(*)</label>
+                                <div class="form-group">
+                                    <select name="route" id="route" required>
+                                    <option value="1">Parelroute</option>
+                                    <option value="2">Klassieke route</option>
+                                    <option value="3">Individuele Coaching</option>
+                                    </select>
+                                </div>
+                                <label for="aantal">Aantal Personen(*)</label>
+                                <div class="form-group">
+                                    <input type="number" min=1 max=6 required/>
+                                </div>
+                            </div>       
                         </div>
-                       
-                    </div>
+                        </div>
                 <br><br>
                 <input type="submit" value="Sturen">
                 <input type="reset" value="Leegmaken">
                 </form>
+                </div>
             </div>
-        </div>
         
     	<div class="col-lg-4">
     		<div class="widget-contact">
@@ -355,9 +384,51 @@
     			</address>		
     		</div>	
     	</div>
+    	</div>
 </div>
 </section>
 <!-- /Section: contact -->
+
+
+<script>
+$(document).ready(function() {
+    $('#datePicker')
+        .datepicker({
+            format: 'dd/mm/yyyy'
+        })
+        .on('changeDate', function(e) {
+            // Revalidate the date field
+            $('#contactform').formValidation('revalidateField', 'date');
+        });
+
+    $('#contactform').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            date: {
+                validators: {
+                    notEmpty: {
+                        message: 'The date is required'
+                    },
+                    date: {
+                        format: 'DD/MM/YYYY',
+                        message: 'The date is not a valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
+
+
+
+
 
 
 
@@ -489,6 +560,10 @@ Prijs: <b>85 Eur</b> per halve dag  (een zorgvuldige uitgekiende route op maat, 
 <script type="text/javascript" src="js/routes.js"></script>
 <!-- script for dynamic columns --> 
 <script type="text/javascript" src="js/columns.js"></script>
+
+<script type="text/javascript" src="js/date-picker.js"></script>
+
+
 
 </body>
 </html>
