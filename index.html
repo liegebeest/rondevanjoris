@@ -263,9 +263,7 @@
     </div> 
 </div>
 </section>
-	
-	
- 
+
 <!-- Section: contact -->
 <section id="contact" class="home-section text-center">
 	<div class="heading-contact">
@@ -291,54 +289,47 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="boxed-grey">
-                <div id="sendmessage">Je bericht is verstuurd.</div>
-                <div id="errormessage"></div>
-                <form method="post" action="http://www.rondevanjoris.be/cgi-bin/FormMail.pl" 
-                accept-charset="ISO-8859-1" onsubmit="var originalCharset = document.charset; 
-                document.charset = 'ISO-8859-1'; 
-                window.onbeforeunload = function () {document.charset=originalCharset;};">          
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="name">
-                                Naam</label> 
-                            <input type="text" name="realname" class="form-control" id="name" placeholder="Naam" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                            <div class="validation"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">
-                                E-mail </label> 
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
-                                <div class="validation"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject"> 
-                                Onderwerp</label>
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Onderwerp" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                            <div class="validation"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="message">
-                                Bericht</label> 
-                            <textarea class="form-control" name="Message" rows="9" data-rule="required" data-msg="" placeholder="Vermeld jouw keuze, datum en het aantal personen ..."></textarea>
-                            <div class="validation"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12"> 
-                        <button type="submit" class="btn btn-skin pull-right" id="btnContactUs" name="recipient" value="info@rondevanjoris.be"> 
-                            Bericht Versturen</button>                            
-                            <input type="hidden" name="redirect" value="http://www.rondevanjoris.be/" />
-                            <input type="hidden" name="missing_fields_redirect" value="http://www.rondevanjoris.be/error.html" />
-                            <input type="hidden" name="required" value="realname,email,Message" />
-                    </div>
-                </div>
+                <form name="contact" id="contact" action="http://rondevanjoris.be/mail.php" method="post">
+                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">
+                                                Naam</label> 
+                                            <input type="text" name="realname" class="form-control" id="name" placeholder="Naam" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">
+                                                E-mail </label> 
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" name="mail" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
+                                                <div class="validation"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="subject"> 
+                                                Onderwerp</label>
+                                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Onderwerp" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                            <div class="validation"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="message">
+                                                Bericht</label> 
+                                            <textarea class="form-control" name="content" rows="9" data-rule="required" data-msg="" placeholder="Vermeld jouw keuze, datum en het aantal personen ..."></textarea>
+                                            <div class="validation"></div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                <br><br>
+                <input type="submit" value="Sturen">
+                <input type="reset" value="Leegmaken">
                 </form>
             </div>
         </div>
+        
     	<div class="col-lg-4">
     		<div class="widget-contact">
     			<h5>Locatie</h5>
