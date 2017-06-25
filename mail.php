@@ -1,18 +1,30 @@
 <?php 
 
+require 'db.php';
+
 $name = $_POST["name"];
-$subject = $_POST["subject"];
 $content = $_POST["content"];
 $mail =  $_POST["mail"];
+$gsm = $_POST["gsm"];
+$date = date("Y-m-d");
 
 
 mail("info@rondevanjoris.be", "From: [" . $mail . "] -> " . $subject, $content, "From: info@rondevanjoris.be");
 
 echo "<br> Bedankt! <br>";
-echo "<br> Mail gestuurd naar: info@rondevanjoris.be <br>";
-echo "<br> Mail gestuurd voor: " . $mail . " <br>";
-echo "<br> Onderwerp: " .  $subject . " <br>";
+echo "<br> Mail gestuurd naar: info@rondevanjoris.be";
+echo "<br> Mail gestuurd voor: " . $mail;
+echo "<br> Datum: " . $date;
+
+if (strlen($gsm) > 0)
+{
+    echo "<br> Gsm: " .  $gsm . " <br>";
+}
 echo "<br> Bericht: " .  $content . " <br>";
+
+
+//I will save the email address and date and content of the message in a table
+$sqltran = mysqli_query($con, "INSERT INTO klanten VALUES('". $mail ."','". $date. "','". $content. "','". $name . "','" . $gsm ."')") or die(mysqli_error($con));
 
 
 ?>
