@@ -2,29 +2,48 @@
 
 require 'db.php';
 
-$name = $_POST["name"];
-$content = $_POST["content"];
-$mail =  $_POST["mail"];
-$gsm = $_POST["gsm"];
-$date = date("Y-m-d");
+$name = mysqli_real_escape_string($con, $_POST["realname"]);
+$mail =  mysqli_real_escape_string($con, $_POST["mail"]);
+$gsm = mysqli_real_escape_string($con, $_POST["gsm"]);
+$date_reserved = $_POST["date"];
+$int_route = $_POST["route"];
+$aantal = $_POST["aantal"];
+$date_email = date("Y-m-d");
 
-
-mail("info@rondevanjoris.be", "From: [" . $mail . "] -> " . $subject, $content, "From: info@rondevanjoris.be");
-
-echo "<br> Bedankt! <br>";
-echo "<br> Mail gestuurd naar: info@rondevanjoris.be";
-echo "<br> Mail gestuurd voor: " . $mail;
-echo "<br> Datum: " . $date;
-
-if (strlen($gsm) > 0)
-{
-    echo "<br> Gsm: " .  $gsm . " <br>";
+switch($int_route){
+    case "1": $route="Parelroute"; break;
+    case "2": $route="Klassieke route"; break;
+    case "3": $route="Individuele Coacing"; break;
 }
-echo "<br> Bericht: " .  $content . " <br>";
 
+$mail_str = "naam: ".$name . 
+            "\ngsm: ".$gsm . 
+            "\ne-mail: ".$mail.
+            "\nroute: ".$route.
+            "\ndatum reservatie: ".$date_reserved.
+            "\naantal personen: ".$aantal . 
+            "\n\n";
+            
+$html_str = "<html> naam: " . $name . 
+            "<br> gsm: " . $gsm . 
+            "<br> e-mail: ".$mail.
+            "<br> route: ".$route.
+            "<br> datum reservatie: ". $date_reserved.
+            "<br> aantal personen: ".$aantal. 
+            "</html>";
+
+mail("info@rondevanjoris.be", "From: [" . $mail . "] -> " . $name, $mail_str, "From: info@rondevanjoris.be");
+
+echo "Bedankt!<br><br>";
+echo "Volgende gegevens werden verstuurd:<br><br>";
+echo $html_str;
+echo "<br><br>";
+echo "Je krijgt spoedig een e-mail als je reservatie is ingeboekt.<br>";
+echo "Is dit fout? Stuur dan een e-mail naar info@rondevanjoris.be<br>";
+echo "<br>";
 
 //I will save the email address and date and content of the message in a table
-$sqltran = mysqli_query($con, "INSERT INTO klanten VALUES('". $mail ."','". $date. "','". $content. "','". $name . "','" . $gsm ."')") or die(mysqli_error($con));
+$sqltran = mysqli_query($con, "INSERT INTO klanten VALUES('". $mail ."','". $date_email. "','". $mail_str. "','". $name . "','" . $gsm ."')") or die(mysqli_error($con));
 
 
 ?>
