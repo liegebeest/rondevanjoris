@@ -5,10 +5,13 @@ require 'db.php';
 $name = mysqli_real_escape_string($con, $_POST["realname"]);
 $mail =  mysqli_real_escape_string($con, $_POST["mail"]);
 $gsm = mysqli_real_escape_string($con, $_POST["gsm"]);
+$opm = mysqli_real_escape_string($con, $_POST["opm"]);
+$gepland_input = mysqli_real_escape_string($con, $_POST["gepland"]);
+
 $date_reserved = $_POST["date"];
 $int_route = $_POST["route"];
 $aantal = $_POST["aantal"];
-$date_email = date("Y-m-d");
+$date_email = date("d/m/Y H:i:s"); 
 
 switch($int_route){
     case "1": $route="Parelroute"; break;
@@ -16,23 +19,38 @@ switch($int_route){
     case "3": $route="Individuele Coacing"; break;
 }
 
+switch($gepland_input){
+    case "1": $gepland=true; break;
+    case "2": $gepland=false; break;
+}
+
+$geplande_route_str = $gepland?"JA":"NEE";
+$opm = (strlen($opm)<0)?$opm:"NEE";
+$gsm = (strlen($gsm)<0)?$gsm:"NEE";
+
 $mail_str = "naam: ".$name . 
-            "\ngsm: ".$gsm . 
             "\ne-mail: ".$mail.
             "\nroute: ".$route.
-            "\ndatum reservatie: ".$date_reserved.
-            "\naantal personen: ".$aantal . 
+            "\ndatum route: ".$date_reserved.
+            "\ndatum e-mail sent: ".$date_email.
+            "\naantal personen: ".$aantal. 
+            "\ngeplande route: ". $geplande_route_str.
+            "\nopmerking: ".$opm. 
+            "\ngsm: ".$gsm . 
             "\n\n";
             
 $html_str = "<html> naam: " . $name . 
-            "<br> gsm: " . $gsm . 
             "<br> e-mail: ".$mail.
             "<br> route: ".$route.
-            "<br> datum reservatie: ". $date_reserved.
+            "<br> datum route: ". $date_reserved.
+            "<br> datum e-mail sent: ".$date_email.
             "<br> aantal personen: ".$aantal. 
+            "<br> geplande route: ".$geplande_route_str.
+            "<br> opmerking: ". $opm. 
+            "<br> gsm: " . $gsm . 
             "</html>";
 
-mail("info@rondevanjoris.be", "From: [" . $mail . "] -> " . $name, $mail_str, "From: info@rondevanjoris.be");
+mail("info@rondevanjoris.be", "From: [" . $mail . "] -> " . $name, $mail_str, "From: info@rondevanjoris.be\r\nReply-To:".$mail);
 
 echo "Bedankt!<br><br>";
 echo "Volgende gegevens werden verstuurd:<br><br>";
@@ -43,7 +61,7 @@ echo "Is dit fout? Stuur dan een e-mail naar info@rondevanjoris.be<br>";
 echo "<br>";
 
 //I will save the email address and date and content of the message in a table
-$sqltran = mysqli_query($con, "INSERT INTO klanten VALUES('". $mail ."','". $date_email. "','". $mail_str. "','". $name . "','" . $gsm ."')") or die(mysqli_error($con));
+$sqltran = mysqli_query($con, "INSERT INTO klanten VALUES('". $mail ."','". $mail_str. "','". $name . "','" . $gsm ."')") or die(mysqli_error($con));
 
 
 ?>
