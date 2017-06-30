@@ -179,7 +179,7 @@
                         <h6 class="box-title text-left">Geplande Routes</h6>
                     </div>
     			<table class="table" id="routes"></table>
-			<br><br>
+    			<br><br>
     			<a href="#contact" class="btn btn-success" role="button" aria-disabled="true">Inschrijven</a>
     		    </div>
     	    </div>
@@ -218,7 +218,6 @@
             <br>	
             </div>		
         </div>
-        
 </section>
 
 
@@ -310,7 +309,6 @@
 		</div>
 	</div>
     <div class="row">
-        
         <div class="col-lg-8">
             <div class="boxed-grey">
                 <form name="contact" id="contactform" action="http://rondevanjoris.be/mail.php" method="post">
@@ -338,7 +336,7 @@
                             <label for="datepicker">Datum(*)</label>
                             <div class="form-group">
                                 <div class="input-group input-append date" id="datepicker">
-                                    <input type="text" class="form-control" name="date" placeholder="Vul een datum in" />
+                                    <input type="textarea" class="form-control" name="date" placeholder="Vul een datum in" />
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>
@@ -349,12 +347,25 @@
                                 <div class="form-group">
                                     <input type="number" class="form-control" name="aantal" min=1 max=6 id="aantal" required/>
                                 </div>
-                                <label for="routes">Route(*)</label>
                                 <div class="form-group">
+                                    <label for="name">Opmerking</label> 
+                                    <input type="text" name="opm" class="form-control" id="opm" placeholder="Opmerking" minlength="4" maxlength="100"/>
+                                    <div class="validation"></div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="routes">Route(*)</label>
                                     <select name="route" id="route" required>
                                     <option value="1">Parelroute</option>
                                     <option value="2">Klassieke route</option>
                                     <option value="3">Individuele Coaching</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for "gepland">Geplande Route?</label><br>
+                                    <label class="radio-inline"><input type="radio" name="gepland" value="1" required>Geplande Route</label>
+                                    <label class="radio-inline"><input type="radio" name="gepland" value="2">Eigen Datum</label>
                                     </select>
                                 </div>
                             </div>       
@@ -399,14 +410,6 @@
 <!-- /Section: contact -->
 
 
-
-
-
-
-
-
-
-
 <footer>
 	<div class="container">
 		<div class="row">
@@ -423,8 +426,6 @@
 		</div>	
 	</div>
 </footer>
-
-
 
 
 <!-- Core JavaScript Files -->
@@ -538,24 +539,13 @@ Prijs: <b>85 Eur</b> per halve dag  (een zorgvuldige uitgekiende route op maat, 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
-    
-
-
-
-
+   var dateToday = new Date();
    $('#datepicker').datepicker({
                 showButtonPanel: true,
                 changeMonth: true,
-                locale: 'nl-be',
                 format: 'dd/mm/yyyy',
-            });
-            
-         
-	
-
-            
-            
-            
+                startDate: new Date()
+                });
 </script>
 
 
