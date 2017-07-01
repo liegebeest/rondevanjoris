@@ -1,25 +1,18 @@
 <?php 
 	require 'db.php';
- 		
- 		$sqltran = mysqli_query($con, "SELECT link, date, source, name FROM stukjes") or die(mysqli_error($con));
-		$arrVal = array();
- 		$i=1;
- 		while ($rowList = mysqli_fetch_array($sqltran)) {
- 								 
-						$name = array(
- 	 		 	 				'link'=> $rowList['link'],
-	 		 	 				'date'=> $rowList['date'],
-								'source'=> $rowList['source'],
-								'name'=> $rowList['name']
- 	 		 	 			);		
-
-
-							array_push($arrVal, $name);	
-			$i++;			
-	 	}
-	 		 echo  json_encode($arrVal);		
- 
-
-	 	mysqli_close($con);
+ 	$sqltran = mysqli_query($con, "SELECT link, name FROM stukjes") or die(mysqli_error($con));
+	$arrVal = array();
+ 	$i=1;
+ 	while ($rowList = mysqli_fetch_array($sqltran)) {
+ 							 
+		$column = array(
+		    'link'=> $rowList['link'],
+			'name'=> $rowList['name']
+    		);		
+		array_push($arrVal, $column);	
+		$i++;			
+ 	}
+ 	echo  json_encode($arrVal);		
+ 	mysqli_close($con);
 ?>   
  
