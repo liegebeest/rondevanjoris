@@ -1,0 +1,9 @@
+User-agent:*
+Disallow: /*php$
+Disallow: /js
+Disallow: /img
+Disallow: /css
+Disallow: /color
+Disallow: /cgi-bin
+Disallow: /fonts
+Disallow: /font-awesome
