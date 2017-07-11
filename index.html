@@ -313,16 +313,23 @@
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for "gepland">Geplande Route(*)</label><br>
+                                <label class="radio-inline"><input type="radio" name="gepland" value="1" required>Geplande Route</label>
+                                <label class="radio-inline"><input type="radio" name="gepland" value="2">Eigen Datum</label>
+                                </select>
+                            </div>
+                           
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="aantal">Aantal Personen(*)</label>
                                 <div class="form-group">
-                                    <input type="number" class="form-control" name="aantal" min=1 max=6 id="aantal" required/>
+                                    <input type="number" class="form-control" name="aantal" min=1 max=6 id="aantal" placeholder="Vul het aantal deelnemers in" required/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Opmerking</label> 
-                                    <input type="text" name="opm" class="form-control" id="opm" placeholder="Opmerking" minlength="4" maxlength="100"/>
+                                    <label for="name">Opmerking</label>
+                                    <textarea name="opm" class="form-control" id="opm" rows="8" cols="60" placeholder="Vul hier je opmerking(en) in..."></textarea>
                                     <div class="validation"></div>
                                 </div>
                                 <br>
@@ -332,13 +339,6 @@
                                     <option value="1">Parelroute</option>
                                     <option value="2">Klassieke route</option>
                                     <option value="3">Individuele Coaching</option>
-                                    </select>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <label for "gepland">Geplande Route?</label><br>
-                                    <label class="radio-inline"><input type="radio" name="gepland" value="1" required>Geplande Route</label>
-                                    <label class="radio-inline"><input type="radio" name="gepland" value="2">Eigen Datum</label>
                                     </select>
                                 </div>
                             </div>       
