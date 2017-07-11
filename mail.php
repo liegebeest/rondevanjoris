@@ -11,7 +11,8 @@ $gepland_input = mysqli_real_escape_string($con, $_POST["gepland"]);
 $date_reserved = $_POST["date"];
 $int_route = $_POST["route"];
 $aantal = $_POST["aantal"];
-$date_email = date("d/m/Y H:i:s"); 
+date_default_timezone_set('Europe/Brussels');
+$date_email = date("d/m/Y H:i:s");
 
 switch($int_route){
     case "1": $route="Parelroute"; break;
@@ -32,7 +33,7 @@ $mail_str = "naam: ".$name .
             "\ne-mail: ".$mail.
             "\nroute: ".$route.
             "\ndatum route: ".$date_reserved.
-            "\ndatum e-mail sent: ".$date_email.
+            "\ndatum + time e-mail: ".$date_email.
             "\naantal personen: ".$aantal. 
             "\ngeplande route: ". $geplande_route_str.
             "\nopmerking: ".$opm. 
