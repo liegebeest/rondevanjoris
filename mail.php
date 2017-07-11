@@ -6,6 +6,7 @@ $name = mysqli_real_escape_string($con, $_POST["realname"]);
 $mail =  mysqli_real_escape_string($con, $_POST["mail"]);
 $gsm = mysqli_real_escape_string($con, $_POST["gsm"]);
 $opm = mysqli_real_escape_string($con, $_POST["opm"]);
+
 $gepland_input = mysqli_real_escape_string($con, $_POST["gepland"]);
 
 $date_reserved = $_POST["date"];
@@ -25,8 +26,8 @@ switch($gepland_input){
 }
 
 $geplande_route_str = $gepland?"JA":"NEE";
-$opm = (strlen($opm)<0)?$opm:"NEE";
-$gsm = (strlen($gsm)<0)?$gsm:"NEE";
+$opm = (strlen($opm)>0)?$opm:"NEE";
+$gsm = (strlen($gsm)>0)?$gsm:"NEE";
 
 $mail_str = "naam: ".$name . 
             "\ne-mail: ".$mail.
