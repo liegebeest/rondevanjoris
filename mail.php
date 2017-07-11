@@ -56,13 +56,11 @@ if($gepland == false)
 }
 else
 {
-    echo $date_reserved;
+   
     $date = date_create_from_format('d/m/Y', $date_reserved);
     $date_sql = date_format($date, 'Y-m-d');
-    echo $date_sql;
     $sql_route_possible = "SELECT * from routes where places >= " . $aantal . " AND date = '" . $date_sql . "'";
     $sqltran = mysqli_query($con, $sql_route_possible) or die(mysqli_error($con));
-    echo $sql_route_possible;
     
     $i=0;
     $single_row=NULL;
@@ -74,7 +72,6 @@ else
     
     if($i==1 and $single_row != NULL)
     {
-        var_dump($single_row);
         $route = $single_row['route'];
         $places = $single_row['places'];
         $date = $single_row['date'];
@@ -97,14 +94,7 @@ else
         $sqltran = mysqli_query($con, $sql_update_routes) or die(mysqli_error($con));
             
         mail($mail, "From: [" . $mail_ronde_van_joris . "] -> Reservering gelukt", $mail_str_klant, "From:".$mail_ronde_van_joris."\r\nReply-To:".$mail_ronde_van_joris);
-           
-        echo $html_str_klant; 
-         
-        var_dump($mail_str_klant);
-        var_dump($route);
-        var_dump($places);
-        var_dump($date);
-        var_dump($aantal);
+        echo $html_str_klant;
     }
     else 
     {
