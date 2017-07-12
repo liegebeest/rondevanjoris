@@ -6,7 +6,7 @@ $name = mysqli_real_escape_string($con, $_POST["realname"]);
 $mail =  mysqli_real_escape_string($con, $_POST["mail"]);
 $gsm = mysqli_real_escape_string($con, $_POST["gsm"]);
 $opm = mysqli_real_escape_string($con, $_POST["opm"]);
-$mail_ronde_van_joris = "info@rondevanjoris.be";
+$mail_ronde_van_joris = "info@rondevanjoris.com";
 $gepland_input = mysqli_real_escape_string($con, $_POST["gepland"]);
 $date_reserved = $_POST["date"];
 $int_route = $_POST["route"];
@@ -43,7 +43,7 @@ $mail_str = "naam: ".$name .
 mail($mail_ronde_van_joris, "From: [" . $mail . "] -> " . $name, $mail_str, "From:".$mail_ronde_van_joris."\r\nReply-To:".$mail);
 
 //I will save the email address and date and content of the message in a table
-$sqltran = mysqli_query($con, "INSERT INTO klanten VALUES('". $mail ."','". $mail_str. "','". $name . "','" . $gsm ."')") or die(mysqli_error($con));
+$sqltran = mysqli_query($con, "INSERT INTO klanten (email, message, name, gsm) VALUES('". $mail ."','". $mail_str. "','". $name . "','" . $gsm ."')") or die(mysqli_error($con));
 
 if($gepland == false)
 {
@@ -134,6 +134,6 @@ mysqli_close($con);
 
 <body>
     <br>
-    <a href="http://rondevanjoris.be" class="btn btn-success" role="button" aria-disabled="true">Back</a>
+    <a href="http://rondevanjoris.com" class="btn btn-success" role="button" aria-disabled="true">Back</a>
 </body>
 </html> 
