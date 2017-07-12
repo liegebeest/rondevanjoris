@@ -1,6 +1,6 @@
 var $table = $('#routes');
 $table.bootstrapTable({
-      url: 'http://rondevanjoris.be/routes.php',
+      url: 'http://rondevanjoris.com/routes.php',
       striped: true,
       pagination: true,
       pageSize: 20,
@@ -23,9 +23,5 @@ $table.bootstrapTable({
           field: 'places',
           title: 'Vrije plaatsen',
           align: 'left'
-      },{
-          field: 'subscribe',
-          title: 'Inschrijven',
-          align: 'left'
-      } ],
+      }],
     });
