@@ -1,6 +1,6 @@
 var $table = $('#stukjes');
      $table.bootstrapTable({
-	      url: 'http://rondevanjoris.be/columns.php',
+	      url: 'http://rondevanjoris.com/columns.php',
 	      striped: true,
 	      pagination: true,
 	      pageSize: 20,
@@ -12,5 +12,5 @@ var $table = $('#stukjes');
 	          title: 'Column',
 	          align: 'left',
 	          width: "500"
-	      }],
+	      }]
   	 });
