@@ -7,109 +7,86 @@ $mail =  mysqli_real_escape_string($con, $_POST["mail"]);
 $gsm = mysqli_real_escape_string($con, $_POST["gsm"]);
 $opm = mysqli_real_escape_string($con, $_POST["opm"]);
 $mail_ronde_van_joris = "info@rondevanjoris.com";
-$gepland_input = mysqli_real_escape_string($con, $_POST["gepland"]);
-$date_reserved = $_POST["date"];
-$int_route = $_POST["route"];
 $aantal = $_POST["aantal"];
 date_default_timezone_set('Europe/Brussels');
 $date_email = date("d/m/Y H:i:s");
-
-switch($int_route){
-    case "1": $route="Parelroute"; break;
-    case "2": $route="Klassieke route"; break;
-    case "3": $route="Individuele Coacing"; break;
-}
-
-switch($gepland_input){
-    case "1": $gepland=true; break;
-    case "2": $gepland=false; break;
-}
-
-$geplande_route_str = $gepland?"JA":"NEE";
+$route_id = mysqli_real_escape_string($con, $_POST["myselect"]);
 $opm = (strlen($opm)>0)?$opm:"NEE";
 $gsm = (strlen($gsm)>0)?$gsm:"NEE";
 
-$mail_str = "naam: ".$name . 
+$sql_route_possible = "SELECT date, route, places, id, price from routes where places >= '" . $aantal . "' AND id = '" . $route_id . "'";
+$sqltran = mysqli_query($con, $sql_route_possible) or die(mysqli_error($con));
+
+$i=0;
+$single_row=NULL;
+while($rowList = mysqli_fetch_array($sqltran))
+{
+    $single_row = $rowList;
+    $i++;
+}
+
+if($i==1 and $single_row != NULL)
+{
+    $route = $single_row['route'];
+    $places = $single_row['places'];
+    $date = $single_row['date'];
+    $id= $single_row['id'];
+    $single_price = intval($single_row['price']);
+    $total_price = $single_price * $aantal;
+    $time=strtotime($date);
+    setlocale (LC_TIME, "nl_NL"); 
+    $date = strftime("%A %e %B %Y", $time);
+    
+    $html_str_klant = "Bedankt " . $name . "!" .
+        "<br> Je inschrijving voor de ". $route. " op " .$date." is gelukt voor: " . $aantal. " Personen".
+        "<br> Je krijgt direct een e-mail ter bevestiging.".
+        "<br> Is dit fout? Stuur dan een e-mail naar ".$mail_ronde_van_joris."<br>".
+        "<br>";
+
+    $mail_str_klant = "Beste ".$name.",". 
+        "\n\nJe inschrijving voor de ". $route. " op " .$date." is gelukt voor: " . $aantal. " Personen".
+        "\nGelieve " . strval($total_price) . " EUR over te schrijven op rekeningnummer: BE88 3631 6730 5741 ten minste 48 uur voor de start van de route.".
+        "\nVoor praktische afspraken in verband met de route kan je terecht op de website.".
+        "\n\nGroetjes,".
+        "\nRonde Van Joris";
+        
+    $places_reduced = $places - $aantal;
+    $sql_update_routes = "UPDATE routes set places=".$places_reduced." WHERE id=".$id;
+    $sqltran = mysqli_query($con, $sql_update_routes) or die(mysqli_error($con));
+    
+    //build email
+    $mail_str = "naam: ".$name . 
             "\ne-mail: ".$mail.
             "\nroute: ".$route.
-            "\ndatum route: ".$date_reserved.
+            "\nroute id: ".$id.
+            "\nroute datum: ".$date.
             "\ndatum + time e-mail: ".$date_email.
             "\naantal personen: ".$aantal. 
-            "\ngeplande route: ". $geplande_route_str.
             "\nopmerking: ".$opm. 
             "\ngsm: ".$gsm . 
             "\n\n";
-            
-mail($mail_ronde_van_joris, "From: [" . $mail . "] -> " . $name, $mail_str, "From:".$mail_ronde_van_joris."\r\nReply-To:".$mail);
+        
+    //mail klant
+    mail($mail, "From: [" . $mail_ronde_van_joris . "] -> Reservering gelukt", $mail_str_klant, "From:".$mail_ronde_van_joris."\r\nReply-To:".$mail_ronde_van_joris);
+    echo $html_str_klant;
+    // mail ronde van joris
+    mail($mail_ronde_van_joris, "From: [" . $mail . "] -> " . $name, $mail_str, "From:".$mail_ronde_van_joris."\r\nReply-To:".$mail);
+    
+    //I will save the email address and date and content of the message in a table
+    $klanten_sql = "INSERT INTO klanten (email, message, name, gsm, routeid, places) VALUES('". $mail ."','". $mail_str. "','". $name . "','" . $gsm . "','". $id . "','" . $aantal . "')";
+    $sqltran = mysqli_query($con, $klanten_sql ) or die(mysqli_error($con));
 
-//I will save the email address and date and content of the message in a table
-$sqltran = mysqli_query($con, "INSERT INTO klanten (email, message, name, gsm) VALUES('". $mail ."','". $mail_str. "','". $name . "','" . $gsm ."')") or die(mysqli_error($con));
-
-if($gepland == false)
+}
+else 
 {
     $html_str_klant = "Bedankt " . $name . "!" .
-        "<br> Je inschrijving voor de ". $route. " op " .$date_reserved." voor " . $aantal. " is goed ontvangen.".
-        "<br> Je krijgt zo snel mogelijk een e-mail als de route datum past.".
-        "<br> Is dit fout? Stuur dan een e-mail naar ".$mail_ronde_van_joris."<br>".
+        "<br> Je inschrijving voor de ". $route. " op " .$date_reserved." voor " . $aantal. " personen is niet gelukt, route is volzet.".
+        "<br> Vragen? Aarzel dan niet om een e-mailtje te sturen naar ".$mail_ronde_van_joris."<br>".
         "<br>";
-        
     echo $html_str_klant;
-}
-else
-{
-   
-    $date = date_create_from_format('d/m/Y', $date_reserved);
-    $date_sql = date_format($date, 'Y-m-d');
-    $sql_route_possible = "SELECT * from routes where places >= " . $aantal . " AND date = '" . $date_sql . "'";
-    $sqltran = mysqli_query($con, $sql_route_possible) or die(mysqli_error($con));
-    
-    $i=0;
-    $single_row=NULL;
-    while($rowList = mysqli_fetch_array($sqltran))
-    {
-        $single_row = $rowList;
-        $i++;
-    }
-    
-    if($i==1 and $single_row != NULL)
-    {
-        $route = $single_row['route'];
-        $places = $single_row['places'];
-        $date = $single_row['date'];
-        $id= $single_row['id'];
-        
-        $html_str_klant = "Bedankt " . $name . "!" .
-            "<br> Je inschrijving voor de ". $route. " op " .$date_reserved." voor " . $aantal. " personen is gelukt.".
-            "<br> Je krijgt direct een e-mail ter bevestiging.".
-            "<br> Is dit fout? Stuur dan een e-mail naar ".$mail_ronde_van_joris."<br>".
-            "<br>";
-        
-        $mail_str_klant = "Beste ".$name.",". 
-            "\n\nJe inschrijving voor de ". $route. " op " .$date_reserved." voor " . $aantal. " personen is gelukt.".
-            "\nVoor praktische afspraken in verband met de route kan je terecht op de website.".
-            "\n\nGroetjes,".
-            "\nRonde Van Joris";
-            
-        $places_reduced = $places - $aantal;
-        $sql_update_routes = "UPDATE routes set places=".$places_reduced." WHERE id=".$id;
-        $sqltran = mysqli_query($con, $sql_update_routes) or die(mysqli_error($con));
-            
-        mail($mail, "From: [" . $mail_ronde_van_joris . "] -> Reservering gelukt", $mail_str_klant, "From:".$mail_ronde_van_joris."\r\nReply-To:".$mail_ronde_van_joris);
-        echo $html_str_klant;
-    }
-    else 
-    {
-        $html_str_klant = "Bedankt " . $name . "!" .
-            "<br> Je inschrijving voor de ". $route. " op " .$date_reserved." voor " . $aantal. " personen is niet gelukt.".
-            "<br> Foute input".
-            "<br> Lukt het niet? Aarzel dan niet om een e-mailtje te sturen naar ".$mail_ronde_van_joris."<br>".
-            "<br>";
-        echo $html_str_klant;
-    }
 }
 
 mysqli_close($con);
-
 ?>
 
 <html>
