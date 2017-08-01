@@ -12,5 +12,10 @@ var $table = $('#stukjes');
 	          title: 'Column',
 	          align: 'left',
 	          width: "500"
+	      },{
+	          field: 'source',
+	          title: 'Bron',
+	          align: 'left',
+	          width: "500"
 	      }]
   	 });
