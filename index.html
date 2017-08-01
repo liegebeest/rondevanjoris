@@ -211,7 +211,7 @@
 				<div class="wow bounceInDown" data-wow-delay="0.2s">
 				    	<div class="section-heading"><br>
 				    	    <br>
-    				        <p class="subtitle">Schrijf je in voor een tocht in onderstaand formulier. Kies een van de data van de geplande routes, of stel zelf een datum voor. Ik beantwoord je zo snel mogelijk.</p>
+    				        <p class="subtitle">Schrijf je in voor een tocht in onderstaand formulier. Kies een van de data van de geplande routes, of stel zelf een datum voor via e-mail. Ik beantwoord je zo snel mogelijk.</p>
     				        <br>
 				        </div>
 			</div>
@@ -225,11 +225,9 @@
                 <form name="contact" id="contactform" action="http://rondevanjoris.com/mail.php" method="post">
                             <div class="row">
                                 <div class="col-md-6">
+                                    <label for="name">Route(*)</label>
                                     <div class="form-group">
-                                        <label for "gepland">Geplande Route(*)</label><br>
-                                        <label class="radio-inline"><input type="radio" name="gepland" value="1" required>Geplande Route</label>
-                                        <label class="radio-inline"><input type="radio" name="gepland" value="2">Eigen Datum</label>
-                                        </select>
+                                    <select required class="form-control" id="routedropdown" name="myselect"><option selected="selected">blank</option></select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -241,13 +239,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                  <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="datepicker">Datum(*)</label>
-                                        <div class="input-group input-append date" id="datepicker">
-                                            <input type="textarea" class="form-control" name="date" placeholder="Vul een datum in" />
-                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                        </div>
+                                        <label for="aantal">Aantal Personen(*)</label>
+                                        <input type="number" class="form-control" name="aantal" min=1 max=6 id="aantal" placeholder="Vul het aantal deelnemers in" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -260,36 +255,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="route">Route(*)</label>
-                                    <div class="form-group">
-                                        <select name="route" id="route" required>
-                                        <option value="1">Parelroute</option>
-                                        <option value="2">Klassieke route</option>
-                                        <option value="3">Individuele Coaching</option>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
                                     <label for="email">Gsm</label> 
                                     <div class="form-group">
                                         <input type="tel" class="form-control" name="gsm" id="gsm" placeholder="Vul je gsm-nummer in" minlength="10" maxlength="100" data-msg="Vul je GSM nummer in"/>
                                         <div class="validation"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="aantal">Aantal Personen(*)</label>
-                                        <input type="number" class="form-control" name="aantal" min=1 max=6 id="aantal" placeholder="Vul het aantal deelnemers in" required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="name">Opmerking</label>
-                                        <textarea name="opm" class="form-control" id="opm" rows="5" cols="60" placeholder="Vul hier je opmerking(en) in..."></textarea>
-                                        <div class="validation"></div>
-                                    </div>
+                                        <div class="form-group">
+                                            <label for="name">Opmerking</label>
+                                            <textarea name="opm" class="form-control" id="opm" rows="5" cols="60" placeholder="Vul hier je opmerking(en) in..."></textarea>
+                                            <div class="validation"></div>
+                                        </div>
                                 </div>
                             </div>
                 <br><br>
@@ -316,7 +293,7 @@
     			<address>
     			  <strong>Ronde van Joris op sociale media</strong><br>
                        	<ul class="company-social">
-                            <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li class="social-facebook"><a href="https://www.facebook.com/Rondevanjoris-476675689379641/" target="_blank"><i class="fa fa-facebook"></i></a></li>
                             <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
                             <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
                             <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
@@ -524,6 +501,8 @@ Prijs: <b>85 Eur</b> per halve dag
 <script type="text/javascript" src="js/routes.js"></script>
 <!-- script for dynamic columns --> 
 <script type="text/javascript" src="js/columns.js"></script>
+<!-- script for route dropdowns --> 
+<script type="text/javascript" src="js/routedropdown.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
