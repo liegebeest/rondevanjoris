@@ -1,7 +1,7 @@
 <?php 
 
 require 'db.php';
-$sqltran = mysqli_query($con, "SELECT date, route, price, places, subscribe, id FROM routes where routes.`date` > now() ORDER BY routes.`date` ASC")or die(mysqli_error($con));
+$sqltran = mysqli_query($con, "SELECT date, route, price, places, id FROM routes where routes.`date` > now() ORDER BY routes.`date` ASC")or die(mysqli_error($con));
 $arrVal = array();
 $i=1;
 
@@ -16,8 +16,7 @@ while ($rowList = mysqli_fetch_array($sqltran))
    		'route'=> $rowList['route'],
    		'id' => $rowList['id'],
 		'price'=> $rowList['price'],
-		'places'=> $rowList['places'],
-		'subscribe'=> $rowList['subscribe']
+		'places'=> $rowList['places']
 		);		
 
 	array_push($arrVal, $name);	
