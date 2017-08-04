@@ -17,7 +17,7 @@ $table.bootstrapTable({
           align: 'left'
       },{
           field: 'price',
-          title: 'Prijs/Persoon incl. BTW',
+          title: 'Prijs/Persoon',
           align: 'left'
       },{
           field: 'places',
