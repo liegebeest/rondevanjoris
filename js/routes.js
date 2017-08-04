@@ -23,5 +23,9 @@ $table.bootstrapTable({
           field: 'places',
           title: 'Vrije plaatsen',
           align: 'left'
+      },{
+          field: 'fotolink',
+          title: 'Foto',
+          align: 'left'
       }],
     });
