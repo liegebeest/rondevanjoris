@@ -2,9 +2,9 @@ var $table = $('#stukjes');
      $table.bootstrapTable({
 	      url: 'http://rondevanjoris.com/columns.php',
 	      striped: true,
-	      pagination: true,
-	      pageSize: 20,
-	      pageList: [20, 40, 60, 100, 200],
+	      pagination: false,
+	      pageSize: 5,
+	      pageList: [5, 40, 60, 100, 200],
           minimumCountColumns: 2,
           clickToSelect: true,
 	      columns: [{

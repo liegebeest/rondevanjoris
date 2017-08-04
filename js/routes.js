@@ -2,7 +2,7 @@ var $table = $('#routes');
 $table.bootstrapTable({
       url: 'http://rondevanjoris.com/routes.php',
       striped: true,
-      pagination: true,
+      pagination: false,
       pageSize: 20,
       pageList: [20, 40, 60, 100, 200],
       minimumCountColumns: 2,
