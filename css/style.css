@@ -52,6 +52,16 @@ p {
     line-height: 1.6em;
 }
 
+
+pwit {
+    margin: 0 0 0px;
+    font-size: 18px;
+    line-height: 1.2em;
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 2px 2px 2px #000;
+}
+
 p.lead {
 	font-weight: 600;
 }
@@ -316,12 +326,13 @@ hr {
 
 /* ===========================
 --- Intro
+
 ============================ */
 
 .intro {
 	width:100%;
 	position:relative;
-	background: url(../img/bg1web.jpg) no-repeat top center;
+    background: url(../img/bg1web.jpg) no-repeat top center;
     background-size: cover;
     height: auto;
 }
@@ -332,7 +343,6 @@ hr {
 
 .intro .slogan {
 	text-align: center;
-
 }
 
 .intro .page-scroll {
@@ -348,6 +358,7 @@ hr {
 }
 
 @media screen and (max-width: 700px) {
+
     
 .intro .slogan h2 {
     color: #fff;
@@ -375,6 +386,53 @@ hr {
 }
 
 @media screen and (min-width: 700px) {
+    
+        
+.intro .slogan h1bc {
+    color: #fff;
+    text-shadow: none;
+    font-size: 140px;
+    line-height: 60px;
+    font-weight: 700;
+    font-family: Montserrat, sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+    text-decoration: none;
+    border-width: 0px;
+    border-color: #000;
+    border-style: none;
+    text-shadow: -1px 0 1px #000;
+}
+
+.intro .slogan h2bc {
+    color: #fff;
+    text-shadow: none;
+    font-size: 80px;
+    line-height: 80px;
+    font-weight: 700;
+    font-family: Montserrat, sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+    text-decoration: none;
+    border-width: 0px;
+    border-color: #000;
+    border-style: none;
+    text-shadow: -1px 0 1px #000;
+}
+
+.intro .slogan h3bc {
+    color: #fff;
+    text-shadow: none;
+    font-size: 60px;
+    line-height: 60px;
+    font-weight: 700;
+    font-family: Montserrat, sans-serif;
+    background-color: rgba(0, 0, 0, 0);
+    text-decoration: none;
+    border-width: 0px;
+    border-color: #000;
+    border-style: none;
+    text-shadow: -1px 0 1px #000;
+}
+
 
 .intro .slogan h2 {
     color: #fff;
