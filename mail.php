@@ -7,6 +7,7 @@ $mail =  mysqli_real_escape_string($con, $_POST["mail"]);
 $gsm = mysqli_real_escape_string($con, $_POST["gsm"]);
 $opm = mysqli_real_escape_string($con, $_POST["opm"]);
 $mail_ronde_van_joris = "info@rondevanjoris.com";
+$name_ronde_van_joris = "Ronde van Joris";
 $aantal = $_POST["aantal"];
 date_default_timezone_set('Europe/Brussels');
 $date_email = date("d/m/Y H:i:s");
@@ -67,10 +68,10 @@ if($i==1 and $single_row != NULL)
             "\n\n";
         
     //mail klant
-    mail($mail, "From: [" . $mail_ronde_van_joris . "] -> Reservering gelukt", $mail_str_klant, "From:".$mail_ronde_van_joris."\r\nReply-To:".$mail_ronde_van_joris);
+    mail($mail, "From: [" . $mail_ronde_van_joris . "] -> Reservering gelukt", $mail_str_klant, "From: ".$name_ronde_van_joris." <".$mail_ronde_van_joris.">\r\nReply-To:".$mail_ronde_van_joris);
     echo $html_str_klant;
     // mail ronde van joris
-    mail($mail_ronde_van_joris, "From: [" . $mail . "] -> " . $name, $mail_str, "From:".$mail_ronde_van_joris."\r\nReply-To:".$mail);
+    mail($mail_ronde_van_joris, "From: [" . $mail . "] -> " . $name, $mail_str, "From: ". $name_ronde_van_joris . " <".$mail_ronde_van_joris.">\r\nReply-To:".$mail);
     
     //I will save the email address and date and content of the message in a table
     $klanten_sql = "INSERT INTO klanten (email, message, name, gsm, routeid, places) VALUES('". $mail ."','". $mail_str. "','". $name . "','" . $gsm . "','". $id . "','" . $aantal . "')";
