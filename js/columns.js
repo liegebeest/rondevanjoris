@@ -11,12 +11,12 @@ var $table = $('#stukjes');
 	          field: 'link',
 	          title: 'Column',
 	          align: 'left',
-	          width: "100"
+	          width: "150"
 	      },{
 	          field: 'source',
 	          title: 'Bron',
 	          align: 'left',
-	          width: "100"
+	          width: "50"
 	      },{
 	          field: 'date',
 	          title: 'Datum',
