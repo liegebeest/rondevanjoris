@@ -1,4 +1,5 @@
 <?php 
+// dskjflsakdjfkldsjflksdaj
 	require 'db.php';
  	$sqltran = mysqli_query($con, "SELECT link, source, date, genre FROM stukjes ORDER BY date DESC") or die(mysqli_error($con));
 	$arrVal = array();
