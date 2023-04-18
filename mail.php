@@ -2,6 +2,8 @@
 
 require 'db.php';
 
+// wim was here
+
 $name = mysqli_real_escape_string($con, $_POST["realname"]);
 $mail =  mysqli_real_escape_string($con, $_POST["mail"]);
 $gsm = mysqli_real_escape_string($con, $_POST["gsm"]);
